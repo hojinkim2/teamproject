@@ -1,0 +1,164 @@
+
+<!-- Coding By 김호진 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <style type="text/css">* {cursor: url(https://cur.cursors-4u.net/anime/ani-11/ani1006.cur), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2010/05/06/angewomon-digimon.html" target="_blank" title="Angewomon - Digimon"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Angewomon - Digimon" style="position:absolute; top: 0px; right: 0px;" /></a>
+    <script type="text/javascript">
+        // <![CDATA[
+        var colour="#639"; // change the colour of the clock
+        var clock_size=8; // change the size of the clock (range is from 4 to as big as you like!)
+        
+        /****************************
+        *    Digital Clock Effect   *
+        *(c)2005-7 mf2fm web-design *
+        *  http://www.mf2fm.com/rv  *
+        * DON'T EDIT BELOW THIS BOX *
+        ****************************/
+        var clok;
+        var cpos=0;
+        var newx=xmo=400;
+        var newy=ymo=300;
+        window.onload=function() { if (document.getElementById) {
+          clok=document.createElement("div");
+          clok.style.position="absolute";
+          clok.appendChild(createDigit("dig0"));
+          clok.appendChild(createDigit("dig1"));
+          clok.appendChild(createColon());
+          clok.appendChild(createDigit("dig2"));
+          clok.appendChild(createDigit("dig3"));
+          clok.appendChild(createColon("ms"));
+          clok.appendChild(createDigit("dig4"));
+          clok.appendChild(createDigit("dig5"));
+          document.body.appendChild(clok);
+          tick();
+        }}
+        
+        var digit=new Array(247, 146, 221, 219, 186, 235, 239, 210, 255, 251);
+        
+        function tick() {
+          var now=new Date();
+          var t=Math.floor(now.getTime()/500)%2;
+          var i, j, k;
+          var won=oo(now.getHours())+oo(now.getMinutes())+oo(now.getSeconds());
+          for (i=0; i<6; i++) for (j=0; j<7; j++) {
+            k=digit[won.substring(i, i+1)].toString(2).substring(j+1, j+2);
+            document.getElementById("dig"+i+j).style.backgroundColor=(k==1)?colour:"transparent";
+          }
+          document.getElementById("mstop").style.backgroundColor=(t)?"transparent":colour;
+          document.getElementById("msbot").style.backgroundColor=(t)?"transparent":colour;
+          xmo+=Math.floor((newx-xmo)/4);
+          clok.style.left=Math.round(xmo-(clock_size+2)*4)+"px";
+          ymo+=Math.floor((newy-ymo)/4);
+          clok.style.top=Math.round(ymo-clock_size*2.5)+"px";
+          setTimeout("tick()", 40);
+        }
+        
+        document.onmousemove=mouse;
+        
+        function mouse(e) {
+          newy=(e)?e.pageY:event.y+scro();
+          newx=(e)?e.pageX:event.x;
+        }
+        
+        function scro() {
+          var scro=0;
+          if (document.body.scrollTop) scro=document.body.scrollTop;
+          else if (document.documentElement && document.documentElement.scrollTop) scro=document.documentElement.scrollTop;
+          return (scro);
+        }
+        
+        function oo(o) { return(((o<10)?"0"+o:o).toString()); }
+        
+        function createDigit(id) {
+          var odiv=createDiv(0, cpos, clock_size+clock_size+2, clock_size+2, false);
+          cpos+=clock_size+4;
+          odiv.appendChild(createDiv(0, 1, 2, clock_size, id+"0"));
+          odiv.appendChild(createDiv(1, 0, clock_size, 2, id+"1"));
+          odiv.appendChild(createDiv(1, clock_size, clock_size, 2, id+"2"));
+          odiv.appendChild(createDiv(clock_size, 1, 2, clock_size, id+"3"));
+          odiv.appendChild(createDiv(clock_size+1, 0, clock_size, 2, id+"4"));
+          odiv.appendChild(createDiv(clock_size+1, clock_size, clock_size, 2, id+"5"));
+          odiv.appendChild(createDiv(clock_size+clock_size, 1, 2, clock_size, id+"6"));
+          return (odiv);
+        }
+        
+        function createColon(id) {
+          var odiv=createDiv(0, cpos, clock_size+clock_size+2, 2, false);
+          cpos+=4;
+          var dot1=createDiv(4, 0, 3, 2, (id)?id+"top":false);
+          dot1.style.backgroundColor=colour;
+          odiv.appendChild(dot1);
+          var dot2=createDiv(clock_size+clock_size-5, 0, 3, 2, (id)?id+"bot":false);
+          dot2.style.backgroundColor=colour;
+          odiv.appendChild(dot2);
+          return (odiv);
+        }
+        
+        function createDiv(top, left, height, width, id) {
+          var div=document.createElement("div");
+          div.style.position="absolute";
+          div.style.top=top+"px";
+          div.style.left=left+"px";
+          div.style.height=height+"px";
+          div.style.width=width+"px";
+          div.style.overflow="hidden";
+          if (id) div.setAttribute("id", id);
+          return (div);
+        }
+        // ]]>
+        </script>
+
+</head>
+
+<body>
+    <div id="main-header">
+        <header calss="container">
+            <div>
+                <label for="checkbox">▼</label>
+                <h1>개발자 김호진</h1>
+            </div>
+            <input id="checkbox" checked="checked" type="checkbox">
+            <nav>
+                <ul>
+                    <li><a href="#">JAVA</a></li>
+                    <li class="active"><a href="#">Network</a></li>
+                    <li><a href="totalWork.html">HTML</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div id="main-content">
+        <article class="container">
+            <img src="image/Bill Gates.jpg" width="100" height="100">
+            <h1>빌 게이츠(Bill Gates) 명언</h1>
+            <p>우리는 앞으로 2년 뒤에 닥쳐올 변화에 대해서는 과대평가하지만 10년 뒤에 올 변화는 과소평가하는 경향이 있다. 그렇다고 스스로를 나태함으로 이끌지는 마라.</br>
+            (We always overestimate the change that will occur in the next two years and underestimate the change that will occur in the next ten. Don't let yourself be lulled into inaction.)</p>
+        </article>
+    </div>
+    <div id="sub-content">
+        <article class="container">
+            <h1>강아지 : 골든 리트리버 (Golden Retriever)</h1>
+            <h2>부드럽고 화려한 황금색 털처럼 밝은 성격의 개</h2>
+            <img src="image/그림도장합침.png">
+            <p>골드와 크림색이 있으며 구불거리며 단색인 털이 수수한 아름다움이 있다. 이중모의 구조기 때문에 봄에 속털이 빠지므로 이 시기에 솔질을 자주 해주어 빠진 털을 제거하여 피부병을 예방하고, 워낙 얌전한 개이므로 인위적인 운동을 시켜 비만을 방지해야 한다. </p>
+            <br>
+            <h1>고양이 : 먼치킨 (Standard munchkin cat) </h1>
+            <h2>식육목(食肉目) 고양이과의 포유류로 미국에서 자연 발생한 종이다.</h2>
+            <img src="image/그림도장합침2.png">
+            <p>먼치킨은 중소형 고양이이며, 몸통이 길고 다리가 짧다. 완전히 자라면 2.2~4kg 정도의 무게가 나간다. 먼치킨은 짧은 다리 이외에 정해진 모색이나 무늬가 존재하지 않으며, 머리의 크기나 생김새 또한 조금씩 다르다. 기본적으로 광대뼈가 높으며, 귀는 끝부분이 다소 둥글고 눈은 호두 모양이다. 사교적인 성격으로 놀기 좋아하며, 호기심이 많고 장난감을 가지고 달리고 쫓기는 것을 좋아한다.</p>
+        </article>
+    </div>
+    <div id="main-footer">
+        <footer class="container">
+            <div>@1991-2017 Example. All rights reserved.</div>
+        </footer>
+    </div>
+</body>
+</html>

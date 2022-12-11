@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rupplez's blog</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function() {
+            var width = $("[data-role='slider']").attr('data-width');
+            var height = $("[data-role='slider']").attr('data-height');
+            var count = $("[data-role='slider'] div.item").length;
+            var currentPage = 0;
+            var changePage = function() {
+                $("[data-role='slider']>.container").animate({
+                    left: -currentPage * width
+                }, 500);
+            };
+
+            $("[data-role='slider']").css({
+                position: 'relative',
+                overflow: 'hidden',
+                width: width,
+                height: height
+            }).find('.container').css({
+                position: 'absolute',
+                width: count * width,
+                overflow: 'hidden',
+            }).find('.item').css({
+                width: width,
+                height: height,
+                float: 'left',
+                backgroundSize: 'cover'
+            });
+
+            $('#left-button').click(function () {
+                if(currentPage > 0) {
+                    currentPage-=1;
+                    changePage();
+                }
+            }).css ({
+                left: 0,
+                position: 'absolute'
+            });
+
+            $('#right-button').click(function () {
+                if(currentPage < count - 1) {
+                    currentPage+=1;
+                    changePage();
+                }
+            }).css ({
+                left: width / 2,
+                position: 'absolute'
+            });
+
+            $('.outer-menu-item').hover(function() {
+                $(this).find('.inner-menu').show();
+            }, function() {
+                $(this).find('.inner-menu').hide();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="main-header">
+            <hgroup>
+                <h1 class="master-title">rupplez's blog&#x1F60E;</h1><br>
+                <h1 class="master-description">
+                    <b><i>개발자 이예현에 대하여</i></b>
+                    <p>- 사용 기기: M1 맥북 에어(2020년형)</p>
+                    <p>- 최종 학력: 고등학교 중퇴</p>
+                    <p>- 나이 : 18</p>
+                    <p>- 꿈 : 실리콘밸리의 개발자</p>
+                    <p>- 취미: 기타 연주, 음악 듣기(락)</p>
+                    <b>- </b><a href="https://github.com/rupplez">Github</a>
+                </h1>
+            </hgroup>
+        </header>
+        <nav id="main-navigation">
+            <div class="pull-left">
+                <ul class="outer-menu">
+                    <li class="outer-menu-item">
+                        <span class="menu-title">메뉴1</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">메뉴2</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">메뉴3</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <div class="search-bar">
+                    <form>
+                        <input type="text" class="input-search">
+                        <input type="submit" class="input-search-submit" value="검색">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div id="content">
+            <section id="main-section">
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">자작 게임</h1>
+                        <p class="article-date">2022년 07월 18일</p>            
+                    </div>
+                    <div class="article-body">
+                    <div data-role="slider" data-width="500" data-height="300">
+                        <div class="container">
+                            <div class="item" style="background-image: url('tetris_rupplez.PNG');">
+                            </div>
+                            <div class="item" style="background-image: url('othello_rupplez.PNG');">
+                            </div>
+                        </div>
+                        <div id="left-button" style="float: left; width: 50%; height: 100%;">
+                        </div>
+                        <div id="right-button" style="float: left; width: 50%; height: 100%;">
+                        </div>
+                    </div>
+                    <br> 
+                    <br>
+                    <p>c언어로 만든 테트리스와 오델로입니다.</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">코딩</h1>
+                        <p class="article-date">2022년 07월 12일</p>            
+                    </div>
+                    <!-- <div class="article-body">
+                    <div data-role="slider" data-width="500" data-height="300">
+                        <div class="container">
+                            <div class="item" style="background-image: url('img_test.PNG');">
+                            </div>
+                            <div class="item" style="background-image: url('bliss.jpg');">
+                            </div>
+                            <div class="item" style="background-image: url('Penguins.jpg');">
+                            </div>
+                        </div>
+                    </div>    
+                    <button id="left-button">◀</button>
+                    <button id="right-button">▶</button> -->
+                    <img src="img_test.PNG">
+                    <br> 
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">werawer</h1>
+                        <p class="article-date">2022년 07월 06일</p>            
+                    </div>
+                    <div class="article-body">
+                        <img src="http://placekitten.com/300/300">
+                        <br> 
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">asdfasdf</h1>
+                        <p class="article-date">2022년 07월 06일</p>            
+                    </div>
+                    <div class="article-body">
+                        <img src="http://placekitten.com/500/500">
+                        <br> 
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </article>
+            </section>
+            <aside id="main-aside">
+                <div class="aside-list">
+                    <h3>카테고리</h3>
+                    <ul>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </div>
+                <div class="aside-list">
+                    <h3>최근 글</h3>
+                    <ul>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <footer id="main-footer">
+            <a href="https://www.google.com/">Go to Google</a>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!--  -->

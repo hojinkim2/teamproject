@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML5 with Hanbit</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+    </script>
+    <!-- 스타일 초기화 -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        a{ text-decoration: none; }
+        img{ border: 0; }
+        li{ list-style: none; }
+        body{ background: #D6D5A8; }
+    </style>
+
+    <!-- 공통 스타일 -->
+    <style>
+        .container{
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+
+    <!-- 헤더 스타일 -->
+    <style>
+        #main-header{
+            padding: 10px 5px;
+        }
+
+        #main-header h1{
+            font-size: 20px;
+            font-weight: normal;
+            line-height: 27px;
+            color: #222;
+        }
+
+        #main-header ul{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        #main-header li{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #main-header li a{
+            color: #555;
+        }
+
+        #main-header li.active a{
+            color: black;
+            font-weight: 500;
+        }
+
+        #main-header label{
+            text-align: center;
+            float: right;
+            width: 40px;
+            height: 27px;
+            line-height: 27px;
+            color: #222;
+            border: 1px solid #222;
+            border-radius: 5px;
+        }
+
+        #checkbox{
+            display: none;
+        }
+
+        #checkbox + nav{
+            display: block;
+        }
+        
+        #checkbox:checked + nav{
+            display: none;
+        }
+    </style>
+
+    <!-- 본문과 푸터 스타일 -->
+    <style>
+        #main-content{
+            background: #816797;
+            padding: 40px 15px 30px;
+        }
+
+        #main-content h1{
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 500;
+        }
+
+        #main-content p{
+            text-align: center;
+            color: white;
+        }
+
+        #sub-content{
+            padding-top: 30px;
+        }
+
+        #sub-content h1{
+            text-align: center;
+            color: #333;
+        }
+
+        #sub-content h2{
+            text-align: center;
+            color: #333;
+            font-size: 17px;
+        }
+
+        #sub-content p{
+            color: #555;
+        }
+
+        #sub-content img{
+            width: 200px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        #main-footer {
+            padding-top: 40px;
+        }
+
+        footer{
+            background: #323232;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="main-header">
+        <header class="container">
+            <div>
+                <label for="checkbox">▼</label>
+                <h1>개발자 김용선</h1>
+            </div>
+            <input id="checkbox" checked="checked" type="checkbox" />
+            <nav>
+                <ul>
+                    <li><a href="#">HTML5<a></li>
+                    <li class="active"><a href="#">Network</a></li>
+                    <li><a href="#">Database</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div id="main-content">
+        <article class="container">
+            <h1>磨斧爲針</h1>
+            <p>아무리 이루기 힘든 일도 끊임없는 노력과 끈기있는 인내로 성공한다</p>
+        </article>
+    </div>
+    <div id="sub-content">
+        <article class="container">
+            <h1>HTML5</h1>
+            <h2>하이퍼텍스트 마크업 언어</h2>
+            <img src="html.png">
+            <p>HTML5는 HTML의 완전한 5번째 버전으로 월드 와이드 웹 (World Wide Web)의 핵심 마크업 언어이다. 2004년 7월 Web Hypertext Application Technology Working Group(WHATWG)에서 웹 애플리케이션 1.0이라는 이름으로 세부 명세 작업을 시작하였다.
+
+                HTML5는 HTML 4.01, XHTML 1.0, DOM 레벨 2 HTML에 대한 차기 표준 제안이다. 비디오, 오디오 등 다양한 부가기능과 최신 멀티미디어 콘텐츠를 액티브X 없이 브라우저에서 쉽게 볼 수 있게 하는 것을 목적으로 한다.
+                
+                W3C는 2014년 10월 28일 HTML5 표준안을 확정했다고 발표했다.
+                
+                이후 2016년 11월 1일 HTML5의 마이너 업데이트 버전인 HTML5.1 표준안을 확정, 2017년 12월 14일 HTML5.2 표준안을 확정했다. HTML5.3 표준안은 현재 작업 초안 단계로 진행 중이다.</p>
+            <br/>
+            <h1>CSS</h1>
+            <h2>캐스케이딩 스타일 시트</h2>
+            <img src="css.png">
+            <p>종속형 시트 또는 캐스케이딩 스타일 시트(Cascading Style Sheets, CSS)는 마크업 언어가 실제 표시되는 방법을 기술하는 스타일 언어(style sheet language)로[1], HTML과 XHTML에 주로 쓰이며, XML에서도 사용할 수 있다. W3C의 표준이며, 레이아웃과 스타일을 정의할 때의 자유도가 높다.</p>
+        </article>
+    </div>
+    <div id="main-footer">
+        <footer class="container">
+            <div>Coding By 김용선 2022~</div>
+        </footer>
+    </div>
+</body>
+</html>

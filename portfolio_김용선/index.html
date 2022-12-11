@@ -1,0 +1,719 @@
+<!-- Coding by 김용선 -->
+<!-- Date 2022.07.06 Wed -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.outer-menu-item').hover(function(){
+                $(this).find('.inner-menu').show();
+            }, function(){
+                $(this).find('.inner-menu').hide();
+            });
+
+            // slider
+            var width = $('[data-role="slider"]').attr('data-width');
+            var height = $('[data-role="slider"]').attr('data-height');
+            var count = $('[data-role="slider"] div.img_item').length;
+
+            $('[data-role="slider"]').css({
+                position: 'relative',
+                overflow: 'hidden',
+                width: width,
+                height: height
+            }).find('.img_container').css({
+                position: 'absolute',
+                width: count * width,
+                overflow: 'hidden'
+            }).find('.img_item').css({
+                width: width,
+                height: height,
+                float: 'left'
+            });
+            
+            var currentPage = 0;
+            var changePage = function(){
+
+                $('[data-role="slider"] > .img_container').animate({
+                    left: -currentPage * width
+                }, 500);
+            };
+
+        $('#left-button').click(function(){
+                if(currentPage > 0){
+                    currentPage -= 1;
+                    changePage();
+                }
+            });
+
+        $('#right-button').click(function(){
+            if(currentPage < count -1){
+                    currentPage += 1;
+                    changePage();
+                }
+            });
+        //slider
+
+        });
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: '맑은 고딕', 'Malgun Gothic', Gothic, sans-serif;
+        }
+
+        a{ text-decoration: none;}
+
+        li{ list-style: none;}
+
+
+        .pull-left{float: left;}
+        .pull-right{float: right;}
+
+
+        body{
+            width: 960px;
+            margin: 0 auto;
+            background: #525E75;
+        }
+
+        #page-wrapper{
+            background: #F1DDBF;
+            margin: 40px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+        }
+
+
+        #main-header{padding: 40px 50px;}
+
+        .master-title{
+            font-size: 30px;
+            color: #181818;
+        }
+        .master-description{
+            font-size: 15px;
+            font-weight: 500;
+            color: #383838;
+        }
+
+
+
+        #main-navigation{
+            border-top: 1px solid #C8C8C8;
+            border-bottom: 1px solid #C8C8C8;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+
+        .outer-menu-item{
+            float: left;
+            position: relative;
+        }
+        .outer-menu-item:hover{
+            background: black;
+            color: white;
+        }
+        
+        .menu-title{
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+
+        .inner-menu{
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(5, 5, 5, 0.9);
+            z-index: 1000;
+            text-align: center;
+        }
+        .inner-menu-item > a{
+            display: block;
+            padding: 5px 10px;
+            color: black;
+            font-size: 12px;
+        }
+        .inner-menu-item > a:hover{
+            background: black;
+            color: white;
+        }
+
+
+
+        .search-bar{
+            height: 26px;
+            padding: 7px;
+        }
+
+        .input-search{
+            display: block;
+            float: left;
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            border-radius: 15px 0 0 15px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            width: 120px;
+            height: 24px;
+            padding: 0 0 0 10px;
+            font-size: 12px;
+            color: #555555;
+        }
+
+        .input-search:focus{
+            border-color: rgba(82, 168, 236, 0.8);
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-search-submit{
+            display: inline;
+            float: left;
+            width: 50px;
+            height: 26px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid #CCCCCC;
+            margin-left: -1px;
+            vertical-align: top;
+
+        }
+
+
+
+        #content{ overflow: hidden;}
+
+        #main-section{
+            float: left;
+            width: 710px;
+        }
+        #main-aside{
+            float: right;
+            width: 200px;
+        }
+
+
+
+        article{
+            padding: 0 10px 20px 10px;
+            border-bottom: 1px solid #C8C8C8;
+        }
+
+        .article-header{ padding: 20px 0;}
+        .article-title{
+            font-size: 25px;
+            font-weight: 500;
+            padding-bottom: 10px;
+        }
+        .article-date{ font-size: 13px;}
+        .article-body{ font-size: 14px;}
+
+
+
+        .aside-list{ padding: 10px 0 30px 0;}
+        .aside-list > h3{
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .aside-list li a{
+            margin-left: 8px;
+            font-size: 13px;
+            color: #6C6C6C;
+        }
+        .font-green{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="main-header">
+            <hgroup>
+                <h1 class="master-title">개발자 김용선의 개발일지</h1>
+                <h2 class="master-description">서울IT아카데미</h2>
+            </hgroup>
+        </header>
+        <nav id="main-navigation">
+            <div class="pull-left">
+                <ul class="outer-menu">
+                    <li class="outer-menu-item">
+                        <span class="menu-title">HTML5</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">기본구조</a></li>
+                            <li class="inner-menu-item"><a href="#">기본태그</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">CSS3</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">속성</a></li>
+                            <li class="inner-menu-item"><a href="#">레이아웃</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">JavaScript</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">jQuery</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                            <li class="inner-menu-item"><a href="#">데이터</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">Work</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="pinterest.html">Pinterest</a></li>
+                            <li class="inner-menu-item"><a href="mobilepage.html">MobilePage</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <div class="search-bar">
+                    <form>
+                        <input type="text" class="input-search">
+                        <input type="submit" class="input-search-submit" value="검색">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div id="content">
+            <section id="main-section">
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">HTML5 웹 프로그래밍 실습</h1>
+                        <p class="article-date">2022년 07월 12일</p>
+                    </div>
+                    <div class="article-body">
+                        <div data-role="slider" data-width="710" data-height ="946">
+                            <div class="img_container">
+                                <div class="img_item">
+                                    <img src="photo_05.jpg">
+                                </div>
+                                <div class="img_item">
+                                    <img src="photo_03.jpg">
+                                </div>
+                                <div class="img_item">
+                                    <img src="photo_04.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <button id="left-button" >←</button>
+                        <button id="right-button">→</button>
+                            <p>&lt;실습현장&gt;</p>
+                        <br>
+                        <br>
+                        <p>서울IT아카데미에서 정보처리산업기사(과정평가형)수업을 통해 HTML5 웹 프로그래밍 실습을 하고있다.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            수업을 통해 보고 배운것을 이용해 나만의 최종 포트폴리오를 만드는것이 목표이다.
+                        </p>
+                        <br>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">웹 페이지 기본 구조와 작성 방법</h1>
+                        <p class="article-date">2022년 07월 05일</p>
+                    </div>
+                    <div class="article-body">
+                        <br>
+                        <h2>1. 태그와 요소</h2>
+                        <br>
+                        <p>
+                            HTML페이지를 구성하는 각 부품을 '요소'라고 한다. 태그는 이러한 요소를 만들때
+                            사용하는 작성 방법이다.<br>
+                        </p>
+                        <br>
+                        <h2>2. 속성</h2>
+                        <br>
+                        <p>
+                            속성은 태그에 추가 정보를 부여할 때 사용하는 것이다.<br><br>
+                            &lt;h1 title="header"&gt;Hello HTML5&lt;/h1&gt;<br>
+                            &lt;img src="image.png"&gt;
+                        </p>
+                        <br>
+                        <h2>3. 주석</h2>
+                        <br>
+                        <p>
+                            프로그래밍 언어에서 프로그램 실행에 영향을 미치지 않고 설명용으로 사용하는 코드를 '주석'이라고 한다.<br><br>
+                            &lt;!-- 주석 --&gt;
+                        </p>
+                        <br>
+                        <h2>4. 내부 스타일시트 작성과 실행</h2>
+                        <br>
+                        <p>
+                            &lt;style&gt;<br>
+                            h1{<br>
+                                color: white;<br>
+                                background: black;<br>
+                            }<br>
+                            &lt;/style&gt;
+                        </p>
+                        <br>
+                        <h2>5. 외부 스타일시트 작성과 실행</h2>
+                        <br>
+                        <p>
+                            스타일시트에 다음과 같이 코드를 작성하고 Style.css로 저장한다.<br>
+                            h1{<br>
+                                color: white;<br>
+                                background: black;<br>
+                            }<br><br>
+                            그런 다음 link 태그를 사용해 외부 스타일시트를 불러온다.<br>
+                            &lt;head&gt;<br>
+                            &lt;link rel="stylesheet" href="Style.css"&gt;<br>
+                            &lt;/head&gt;
+                        </p>
+                        <br>
+                        <h2>6. 내부 자바스크립트 작성과 실행</h2>
+                        <br>
+                        <p>
+                            head 태그나 body 태그 내부에 다음과 같이 script 태그를 생성한다.<br><br>
+                            &lt;script&gt;<br>
+                            alert('Hello JavaScript');<br>
+                            &lt;/script&gt;
+                        </p>
+                        <br>
+                        <h2>7. 외부 자바스크립트 작성과 실행</h2>
+                        <br>
+                        <p>
+                            다음과 같이 코드를 작성하고 파일명.js로 저장한다.<br>
+                            alert('OuterScript');<br><br>
+                            그리고 script 태그를 사용해 외부 자바스크립트를 불러온다.<br>
+                            &lt;script src="파일명.js"&gt;&lt;/script&gt;
+                        </p>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">HTML5 기본 태그</h1>
+                        <p class="article-date">2022년 07월 06일</p>
+                    </div>
+                    <div class="article-body">
+                        <br>
+                        <h2>1. 제목과 본문 글자 태그</h2>
+                        <br>
+                        <table border="4">
+                            <tr>
+                                <td colspan="2">태그</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                               <td rowspan="6">제목 글자</td>
+                               <td>h1</td>
+                               <td>첫 번째로 큰 제목 글자 생성</td> 
+                            </tr>
+                            <tr>
+                                <td>h2</td>
+                                <td>두 번째로 큰 제목 글자 생성</td>
+                            </tr>
+                            <tr>
+                                <td>h3</td>
+                                <td>세 번째로 큰 제목 글자 생성</td>
+                            </tr>
+                            <tr>
+                                <td>h4</td>
+                                <td>네 번째로 큰 제목 글자 생성</td>
+                            </tr>
+                            <tr>
+                                <td>h5</td>
+                                <td>다섯 번째로 큰 제목 글자 생성</td>
+                            </tr>
+                            <tr>
+                                <td>h6</td>
+                                <td>여섯 번째로 큰 제목 글자 생성</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">본문 글자</td>
+                                <td>p</td>
+                                <td>본문 문단 생성</td>
+                            </tr>
+                            <tr>
+                                <td>br</td>
+                                <td>줄 바꿈</td>
+                            </tr>
+                            <tr>
+                                <td>hr</td>
+                                <td>수평 줄 사입</td>
+                            </tr>
+                        </table>
+                        <br>
+                        공백, 괄호 등은 다음 특수 문자를 사용해 화면에 표시한다.
+                        <table border="4">
+                            <tr>
+                                <td colspan="2">특수 문자</td>
+                                <td>출력 문자</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">&</td>
+                                <td>nbsp;</td>
+                                <td>공백</td>
+                            </tr>
+                            <tr>
+                                <td>lt;</td>
+                                <td>&lt;</td>
+                            </tr>
+                            <tr>
+                                <td>gt;</td>
+                                <td>&gt;</td>
+                            </tr>
+                            <tr>
+                                <td>amp;</td>
+                                <td>&amp;</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h2>2. 앵커 태그</h2>
+                        <br>
+                        <p>
+                            a 태그는 다른 웹 페이지나 웹 페이지 내부의 특정 위치로 이동할 때 사용한다.<br>
+                            &lt;a href="http://이동할 웹 페이지"&gt;출력글자&lt;/a&gt;<br><br>
+                            웹 페이지 내부의 특정 태그로 이동하려면 id 속성을 추가로 사용한다.<br>
+                            &lt;a href="alpha"&gt;Alpha 부분&lt;/a&gt;<br>
+                            &lt;h1 id="alpha"&gt;Alpha&lt;/h1&gt;
+                        </p>
+                        <br>
+                        <h2>3. 글자 모양 태그</h2>
+                        <br>
+                        <table border="4">
+                            <tr>
+                                <td>태그</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                                <td>b</td>
+                                <td>굵은 글자</td>
+                            </tr>
+                            <tr>
+                                <td>i</td>
+                                <td>기울어진 글자</td>
+                            </tr>
+                            <tr>
+                                <td>small</td>
+                                <td>작은 글자</td>
+                            </tr>
+                            <tr>
+                                <td>sub</td>
+                                <td>아래 첨자</td>
+                            </tr>
+                            <tr>
+                                <td>sup</td>
+                                <td>위 첨자</td>
+                            </tr>
+                            <tr>
+                                <td>ins</td>
+                                <td>밑줄 글자</td>
+                            </tr>
+                            <tr>
+                                <td>del</td>
+                                <td>취소선이 그어진 글자</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h2>4. 목록 태그</h2>
+                        <br>
+                        <table border="4">
+                            <tr>
+                                <td>태그</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                                <td>ul</td>
+                                <td>순서가 없는 목록</td>
+                            </tr>
+                            <tr>
+                                <td>ol</td>
+                                <td>순서가 있는 목록</td>
+                            </tr>
+                            <tr>
+                                <td>li</td>
+                                <td>목록 요소 생성</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h2>5. 테이블 태그</h2>
+                        <br>
+                        <table border="4">
+                            <tr>
+                                <td>태그</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                                <td>table</td>
+                                <td>표 삽입</td>
+                            </tr>
+                            <tr>
+                                <td>tr</td>
+                                <td>행 삽입</td>
+                            </tr>
+                            <tr>
+                                <td>th</td>
+                                <td>제목 셀 생성</td>
+                            </tr>
+                            <tr>
+                                <td>td</td>
+                                <td>일반 셀 생성</td>
+                            </tr>
+                        </table>
+                        <table border="4">
+                            <tr>
+                                <td>태그</td>
+                                <td>속성</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                                <td>table</td>
+                                <td>border</td>
+                                <td>표의 테두리 두께 지정</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">th,td</td>
+                                <td>colspan</td>
+                                <td>셀의 너비 지정</td>>
+                            </tr>
+                            <tr>
+                                <td>rowspan</td>
+                                <td>셀의 높이 지정</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <h2>6. 미디어 태그</h2>
+                        <br>
+                        <table border="4">
+                            <tr>
+                                <td>태그</td>
+                                <td>속성</td>
+                                <td>설명</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">img 태그</td>
+                                <td>src</td>
+                                <td>이미지의 경로 지정</td>
+                            </tr>
+                            <tr>
+                                <td>alt</td>
+                                <td>이미지가 없을 때 나오는 글자 지정</td>
+                            </tr>
+                            <tr>
+                                <td>width</td>
+                                <td>이미지의 너비 지정</td>
+                            </tr>
+                            <tr>
+                                <td>height</td>
+                                <td>이미지의 높이 지정</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">audio, video 태그</td>
+                                <td>src</td>
+                                <td>음악, 비디오 파일의 경로 지정</td>
+                            </tr>
+                            <tr>
+                                <td>preload</td>
+                                <td>음악, 비디오를 준비 중일 때 데이터를 모두 불러올지 여부 지정</td>
+                            </tr>
+                            <tr>
+                                <td>autoplay</td>
+                                <td>음악, 비디오의 자동 재생 여부 지정</td>
+                            </tr>
+                            <tr>
+                                <td>loop</td>
+                                <td>음악, 비디오의 반복 여부 지정</td>
+                            </tr>
+                            <tr>
+                                <td>controls</td>
+                                <td>음악, 비디오 재생 도구 출력 여부 지정</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">video 태그</td>
+                                <td>width</td>
+                                <td>비디오의 너비 지정</td>
+                            </tr>
+                            <tr>
+                                <td>height</td>
+                                <td>비디오의 높이 지정</td>
+                            </tr>
+                        </table>
+                        <br><br>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 class="article-title">반응형 웹</h1>
+                        <p class="article-date">2022년 07월 12일</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="photo_01.GIF" width="710">
+                        <br>
+                        <p>반응형 웹은 웹 페이지 하나로 데스크톱, 태블릿PC, 스마트폰에 맞게 디자인이 자동으로 반응해서 변경되는 웹페이지이다.</p>
+                        <br>
+                        <p>1. viewport meta 태그 사용하기<br><br>
+                            viewport meta 태그를 추가함으로써 스마트폰에서도 정상적인 크기로 볼 수 있다.<br><br>
+                            &lt;head&gt;<br>
+                            &lt;meta name="viewport" content="user-scalable=no, initial-scale=1"&gt;<br>
+                            &lt;/head&gt;<br><br>
+                            user-scalable: 화면 및 축소 가능 여부<br>
+                            initial-scale: 초기 확대 비율 <br><br>
+                            2.
+                        </p>
+                    </div>
+                </article>
+            </section>
+            <aside id="main-aside">
+                <div class="aside-list">
+                    <h3>카테고리</h3>
+                    <ul>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </div>
+                <div class="aside-list">
+                    <h3>최근글</h3>
+                    <ul>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                        <li><a href="#">데이터</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <footer id="main-footer">
+            <a href="https://google.com">Coding By 김용선</a>
+        </footer>
+    </div>
+</body>
+</html>

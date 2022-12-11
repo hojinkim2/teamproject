@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hyo yeol coding</title>
+    <!-- 20220712 이효열 -->
+
+    <style>
+        * { 
+            margin: 0; padding: 0;
+            font-family: '맑은 고딕', 'Malgun Gothic', Gothic, sans-serif;
+        }
+
+        .pull-left { float: left; }
+        .pull-right { float: right; }
+
+        a { text-decoration: none; }
+        li { list-style: none; }
+        body {
+            width: 960px; margin: 0 auto;
+            background: #E6E6E6;
+        } 
+
+        #page-wrapper {
+            background: white;
+            margin: 40px 0; padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+        }
+
+        #main-header {
+            padding: 40px  50px;
+        }
+
+        .master-title {
+            font-size: 30px;
+            color: #181818;
+        }
+        .master-description {
+            font-size: 15px; font-weight: 500;
+            color: #383838;
+        }
+        #main-navigation {
+            border-top: 1px solid #C8C8C8;
+            border-bottom: 1px solid #C8C8C8;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+
+        .outer-menu-item {
+            float: left;
+            position: relative;
+        }
+
+        .outer:hover {
+            background: black;
+            color: white;
+        }
+        .menu-title {
+            display: block;
+            height: 30px; line-height: 30px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+        .inner-menu {
+            display: none;
+            position: absolute;
+            top: 40px; left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 6px rgba(5, 5, 5, 0.9);
+            z-index: 1000;
+            text-align: center;
+        }
+        .inner-menu-item > a {
+            display: block;
+            padding: 5px 10px;
+            color: black
+        }
+        .inner-menu-item > a:hover {
+            background: black;
+            color: white;
+        }
+        .search-bar {
+            height: 26px;
+            padding: 7px;
+        }
+        .input-search {
+            display: block;
+            float: left;
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            border-radius: 15px 0 0 15px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+            width: 150px; height: 24px;
+            padding: 0 0 0 10px;
+            font-size: 12px;
+            color: #555555;
+        }
+        .input-search:focus {
+            border-color: rgba(82, 168, 236, 0.8);
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+        .input-search-submit {
+            width: 50px; height: 26px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid #CCCCCC;
+            margin-left: -1px;
+            vertical-align: top;
+            display: inline-block;
+        }
+        
+        #content { overflow: hidden; }
+
+        #main-section {
+            float: left;
+            width: 710px;
+        }
+        #main-aside {
+            float: right;
+            width: 200px;
+        }
+        article {
+            padding: 0 10px 20px 10px;
+            border-bottom: 1px solid #C8C8C8;
+        }
+
+        .article-header { padding: 20px 0; }
+        .article-title {
+            font-size: 25px;
+            font-weight: 500;
+            padding-bottom: 10px;
+        }
+        .article-date { font-size: 13px; }
+        .article-body {
+            font-size: 14px;
+        }
+        .aside-list { padding: 10px 0 30px 0; }
+        .aside-list > h3 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .aside-list li a {
+            margin-left: 8px;
+            font-size: 13px;
+            color: #6C6C6C;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.outer-menu-item').hover(function () {
+                $(this).find('.inner-menu').show();
+            }, function () {
+                $(this).find('.inner-menu').hide();
+            });
+        });
+    </script>
+    
+    <style>
+        /* 슬라이더부분 서식 */
+        div.item:nth-child(1) { background: white; }
+        div.item:nth-child(2) { background: white; }
+        div.item:nth-child(3) { background: white; }
+    </style>    
+    <script>
+        //마지막부분 슬라이더
+        $(document).ready(function () {
+            var width = $('[data-role="slider"]').attr('data-width');
+            var height = $('[data-role="slider"]').attr('data-height');
+            var count = $('[data-role="slider"] div.item').length;
+            $('[data-role = "slider"]').css({
+                position: 'relative',
+                overflow: 'hidden',
+                width: width,
+                height: height
+            }).find('.container').css({
+                position: 'absolute',
+                width: count * width,
+                overflow: 'hidden'
+            }).find('.item').css({
+                width: width,
+                height: height,
+                float: 'left'
+            });
+            var currentPage = 0;
+            var changePage = function () {
+                $('[data-role="slider"] > .container').animate({
+                    left: -currentPage * width
+                }, 500);
+            };
+            $('#left-button').click(function () {
+                if (currentPage > 0) {
+                    currentPage = currentPage - 1;
+                    changePage();
+                }
+            });
+            $('#right-button').click(function () {
+                if (currentPage < count - 1 ) {
+                    currentPage = currentPage + 1;
+                    changePage();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- 20220706 Coding by 효열 -->
+    <div id="page-wrapper">
+        <header id="main-header">
+            <hgroup>
+                <h1 class="master-title">이효열의 코딩일지</h1>
+                <h2 class="master-description"> html5</h2>
+            </hgroup>
+        </header>
+        <nav id="main-navigation">
+            <div class="pull-left">
+                <ul class="outer-menu">
+                    <li class="outer-menu-item">
+                        <span class="menu-title">HTML5</span>
+                        <ul class="inner-menu">
+                            <!-- 나중에 여러페이지를 만들게 되면 그 페이지로 이동하는 링크를 만들 것 -->
+                            <li class="inner-menu-item"><a href="http://www.google.com">구글</a></li>
+                            <li class="inner-menu-item"><a href="http://www.naver.com">네이버</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">CSS3</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="http://www.daum.net">다음</a></li>
+                            <li class="inner-menu-item"><a href="#">핀터레스트</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">JavaScript</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                            <li class="inner-menu-item"><a href="#">구글</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <div class="search-bar">
+                    <form>
+                        <input type="text" class="input-search">
+                        <input type="submit" class="input-search-submit" value="검색">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div id="content">
+            <section id="main-section">
+                <article>
+                    <h1 id="alpha"></h1>
+                    <div class="article-header">
+                        <h1 class="article-title">효열 개발일기</h1>
+                        <p class="article-date">2022년07월06일 117p작성</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="work1.JPG" height="640" width="640">
+                        <br>
+                        <br>
+                        <p>결국엔 코드를 따라쓰는거라 어렵지 않았다.</p>
+                        <br>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 id="beta"></h1>
+                        <h1 class="article-title">CSS적용하기</h1>
+                        <p class="article-date">2022년07월12일</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="css.png" height="640" width="640">
+                        <br>
+                        <br>
+                        <p>CSS를 적용하니 그럴듯한 홈페이지가 됐다.</p>
+                        <br>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header">
+                        <h1 id="gamma"></h1>
+                        <h1 class="article-title">링크확인용</h1>
+                        <p class="article-date">2022년07월13일</p>
+                    </div>
+                    <div class="article-body">
+                        <img src="hyperlink.PNG" height="640" width="640">
+                        <br>
+                        <br>
+                        <p>
+                        article에 각각 하이퍼링크를 할당시켜 오른쪽 탭에서 바로 갈 수 있게 해봤다.
+                        이걸 이용해서 페이지당 내가 원하는 부분으로 갈 수 있을 것 같다.
+                        </p>
+                        <br>
+                    </div>
+                </article>
+                <article>
+                    <h1 id="gallery"></h1>   
+                    <h1 class="article-title">7월 18일 학습내용</h1>
+                    <div data-role="slider" data-width="640" data-height="640">
+                        <div class="container">
+                            <div class="item">
+                                <img src="light.png" width="640" height="480">
+                                7월 18일에는 Lightbox에 대해서 배웠다.
+                                sns에서 자주 봤었던 것 같은데, 배경을 일부러 어둡게 해서 가운데 있는 사진을 강조하게 하는 플러그인이다.
+                            </div>        
+                            <div class="item">
+                                <img src="scroll.png" width="640" height="480">
+                                포털사이트에서 이미지검색을 할때 자주보이던 Masonry를 만드는 방법에 대해 배웠다.
+                                아직 각각 상자에 사진을 할당하는 방법은 모르겠다..
+                            </div>        
+                            <div class="item">
+                                <img src="gallery.png" width="640" height="480">
+                                마지막으로 사진을 좌우로 넘기는 Gallery에 대해서 알게되었다.
+                                다른사람들 포트폴리오를 보면 갤러리형식이 많던데, 직접 구현해보니 신기했다.
+                            </div>
+                        </div>
+                    </div>
+                    <button id="left-button">←</button>
+                    <button id="right-button">→</button>
+                </article>
+            </section>
+            <aside id="main-aside">
+                <div class="aside-list">
+                    <h3>카테고리</h3>
+                    <ul>
+                        <li><a href=#alpha>효열개발일기</a></li>
+                        <li><a href=#beta>CSS적용하기</a></li>
+                        <li><a href=#gamma>링크확인용</a></li>
+                        <li><a href=#gallery>Gallery</a></li>
+                        <li><a href="이효열_001_.html">핀터레스트</a></li>
+                    </ul>
+                <div>
+                <div class="aside-list">
+                    <h3>최근 글</h3>
+                    <ul>
+                        <li><a href="#">구글</a></li>
+                        <li><a href="#">구글</a></li>
+                        <li><a href="#">구글</a></li>
+                        <li><a href="#">구글</a></li>
+                    </ul>    
+                    </div>    
+            </aside>
+        </div>
+    <footer id="main-footer">
+        <a href="#">ITCookBook HTML5 Programming</a>
+    </footer>
+    </div>
+</body>
+</html>
