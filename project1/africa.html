@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
+    <title>afreeca animals</title>
+    <link rel="stylesheet" href="style_africa.css">
+    <link rel="stylesheet" href="style_africa_cur.css">
+    <style type="text/css">* {cursor: url(https://ani.cursors-4u.net/games/gam-16/gam1570.cur), auto !important;}</style><a href="https://www.cursors-4u.com/cursor/2020/12/01/among-us-red-crewmate.html" target="_blank" title="Among Us - Red Crewmate"><img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Among Us - Red Crewmate" style="position:absolute; top: 0px; right: 0px;" /></a>
+    <script type="text/javascript">
+        // <![CDATA[
+        var sparks=75; // how many sparks per clicksplosion
+        var speed=33; // how fast - smaller is faster
+        var bangs=5; // how many can be launched simultaneously (note that using too many can slow the script down)
+        var colours=new Array('#03f', '#f03', '#0e0', '#93f', '#0cf', '#f93', '#f0c'); 
+        //                     blue    red     green   purple  cyan    orange  pink
+        
+        /****************************
+        *   Clicksplosion Effect    *
+        *(c)2012-3 mf2fm web-design *
+        *  http://www.mf2fm.com/rv  *
+        * DON'T EDIT BELOW THIS BOX *
+        ****************************/
+        var intensity=new Array();
+        var Xpos=new Array();
+        var Ypos=new Array();
+        var dX=new Array();
+        var dY=new Array();
+        var stars=new Array();
+        var decay=new Array();
+        var timers=new Array();
+        var swide=800;
+        var shigh=600;
+        var sleft=sdown=0;
+        var count=0;
+        
+        function addLoadEvent(funky) {
+          var oldonload=window.onload;
+          if (typeof(oldonload)!='function') window.onload=funky;
+          else window.onload=function() {
+            if (oldonload) oldonload();
+            funky();
+          }
+        }
+        
+        addLoadEvent(clicksplode);
+        
+        function clicksplode() { if (document.getElementById) {
+          var i, j;
+          window.onscroll=set_scroll;
+          window.onresize=set_width;
+          document.onclick=eksplode;
+          set_width();
+          set_scroll();
+          for (i=0; i<bangs; i++) for (j=sparks*i; j<sparks+sparks*i; j++) {
+            stars[j]=createDiv('*', 13);
+            document.body.appendChild(stars[j]);
+          }
+        }}
+        
+        function createDiv(char, size) {
+          var div, sty;
+          div=document.createElement('div');
+          sty=div.style;
+          sty.font=size+'px monospace';
+          sty.position='absolute';
+          sty.backgroundColor='transparent';
+          sty.visibility='hidden';
+          sty.zIndex='101';
+          div.appendChild(document.createTextNode(char));
+          return (div);
+        }
+        
+        function bang(N) {
+          var i, Z, A=0;
+          for (i=sparks*N; i<sparks*(N+1); i++) { 
+            if (decay[i]) {
+              Z=stars[i].style;
+              Xpos[i]+=dX[i];
+              Ypos[i]+=(dY[i]+=1.25/intensity[N]);
+              if (Xpos[i]>=swide || Xpos[i]<0 || Ypos[i]>=shigh+sdown || Ypos[i]<0) decay[i]=1;
+              else {
+                Z.left=Xpos[i]+'px';
+                Z.top=Ypos[i]+'px';
+              }
+              if (decay[i]==15) Z.fontSize='7px';
+              else if (decay[i]==7) Z.fontSize='2px';
+              else if (decay[i]==1) Z.visibility='hidden';
+              decay[i]--;
+            }
+            else A++;
+          }
+          if (A!=sparks) timers[N]=setTimeout('bang('+N+')', speed);
+        }
+        
+        function eksplode(e) { 
+          var x, y, i, M, Z, N;
+          set_scroll();
+          y=(e)?e.pageY:event.y+sdown;
+          x=(e)?e.pageX:event.x+sleft;
+          N=++count%bangs;
+          M=Math.floor(Math.random()*3*colours.length);
+          intensity[N]=5+Math.random()*4;
+          for (i=N*sparks; i<(N+1)*sparks; i++) {
+            Xpos[i]=x;
+            Ypos[i]=y-5;
+            dY[i]=(Math.random()-0.5)*intensity[N];
+            dX[i]=(Math.random()-0.5)*(intensity[N]-Math.abs(dY[i]))*1.25;
+            decay[i]=16+Math.floor(Math.random()*16);
+            Z=stars[i].style;
+            if (M<colours.length) Z.color=colours[i%2?count%colours.length:M];
+            else if (M<2*colours.length) Z.color=colours[count%colours.length];
+            else Z.color=colours[i%colours.length];
+            Z.fontSize='13px';
+            Z.visibility='visible';
+          }
+          clearTimeout(timers[N]);
+          bang(N);
+        } 
+        
+        function set_width() {
+          var sw_min=999999;
+          var sh_min=999999;
+          if (document.documentElement && document.documentElement.clientWidth) {
+            if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+            if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+          }
+          if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+            if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+            if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+          }
+          if (document.body.clientWidth) {
+            if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+            if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+          }
+          if (sw_min==999999 || sh_min==999999) {
+            sw_min=800;
+            sh_min=600;
+          }
+          swide=sw_min-7;
+          shigh=sh_min-7;
+        }
+        
+        function set_scroll() {
+          if (typeof(self.pageYOffset)=='number') {
+            sdown=self.pageYOffset;
+            sleft=self.pageXOffset;
+          }
+          else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+            sdown=document.body.scrollTop;
+            sleft=document.body.scrollLeft;
+          }
+          else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+            sleft=document.documentElement.scrollLeft;
+            sdown=document.documentElement.scrollTop;
+          }
+          else {
+            sdown=0;
+            sleft=0;
+          }
+        }
+        // ]]>
+        </script>
+</head>
+    
+<script>
+
+</script>
+
+<style>
+
+</style>
+
+<body>
+    <div class="css_test" style="background-attachment:fixed;">
+
+<div class="section">
+    <input type="radio" name="slide" id="slide01" checked>
+    <input type="radio" name="slide" id="slide02">
+    <input type="radio" name="slide" id="slide03">
+    <input type="radio" name="slide" id="slide04">
+    <input type="radio" name="slide" id="slide05">        
+    <div class="slidewrap">
+
+        <ul class="slidelist">
+            <!-- 슬라이드 영역 -->
+            <li class="slideitem">
+                <a>
+                    <div class="textbox">
+                        <h3>아프리카비단뱀</h3>
+                        <p>African Rock Python</p>
+                    </div>
+                    <img src="images/python.jpg"></a>
+                </a>
+            </li>
+            <li class="slideitem">
+                <a>
+                    <div class="textbox">
+                        <h3>표범</h3>
+                        <p>Leopard</p>
+                    </div>
+                    <img src="images/Leopard.png"></a>
+                </a>
+            </li>
+            <li class="slideitem">
+                <a>
+                    <div class="textbox">
+                        <h3>분홍 가슴 파랑새</h3>
+                        <p>Lilac Breasted Roller</p>
+                    </div>
+                    <img src="images/Lilac breasted roller.png"></a>
+                </a>
+            </li>
+            <li class="slideitem">
+                <a>
+                    <div class="textbox">
+                        <h3>사자</h3>
+                        <p>Lion</p>
+                    </div>
+                    <img src="images/lion.png"></a>
+                </a>
+            </li>
+            <li class="slideitem">
+                <a>
+                    <div class="textbox">
+                        <h3>얼룩말</h3>
+                        <p>Zebra</p>
+                    </div>
+                    <img src="images/Zebra.png"></a>
+                </a>
+            </li class="slideitem">
+
+            <div class="slide-control">
+                <div>
+                    <label for="slide05" class="left"></label>
+                    <label for="slide02" class="right"></label>
+                </div>
+                <div>
+                    <label for="slide01" class="left"></label>
+                    <label for="slide03" class="right"></label>
+                </div>
+                <div>
+                    <label for="slide02" class="left"></label>
+                    <label for="slide04" class="right"></label>
+                </div>
+                <div>
+                    <label for="slide03" class="left"></label>
+                    <label for="slide05" class="right"></label>
+                </div>
+                <div>
+                    <label for="slide04" class="left"></label>
+                    <label for="slide01" class="right"></label>
+                </div>
+            </div>
+
+        </ul>
+
+        <ul class="slide-pagelist">
+            <li><label for="slide01"></label></li>
+            <li><label for="slide02"></label></li>
+            <li><label for="slide03"></label></li>
+            <li><label for="slide04"></label></li>
+            <li><label for="slide05"></label></li>
+        </ul>
+    </div>
+    <div id="main-header">
+        <header calss="container">
+            <div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <h1>아프리카의 동물들</h1>
+                <br>
+                <br>
+                <br>
+            </div>
+        </header>
+    </div>
+    <div id="main-content">
+        <article class="container">
+            <h1>1. 아프리카비단뱀 (African Rock Python)</h1>
+            <h2>아프리카에서 서식하는 비단뱀의 일종으로, 비단뱀속(Python)에 속하는 11종의 뱀들 가운데 하나다.</h2></br>
+            <a href="https://namu.wiki/w/%EC%95%84%ED%94%84%EB%A6%AC%EC%B9%B4%EB%B9%84%EB%8B%A8%EB%B1%80"><img src="images/python.jpg"></a>
+            <p>아프리카에서 가장 거대한 뱀으로, 동남아시아의 그물무늬비단뱀, 버마비단뱀과 더불어 세계 3대 대형 비단뱀으로 꼽힌다. 또한 전세계의 대형 뱀을 통틀어 성질이 가장 사납기로 유명하다.</br>
+                사하라 이남의 아프리카 대륙 전역에 걸쳐 서식하는데, 서식하는 위도에 따라 두 아종으로 구분된다. 두 아종의 명칭은 북부아프리카비단뱀(P. s. sebae)과 남부아프리카비단뱀(P. s. natalensis). 일부 지역에선 두 아종의 서식지가 겹치기도 하는데, 이런 지역에선 남부 아종이 북부 아종보다 높은 지대에서 서식한다. 또한 이런 지역에선 드물게 잡종 개체가 발견되기도 한다.</p>
+        </article>
+    </div>
+    <div id="sub-content">
+        <article class="container">
+            <h1>2. 표범 (Leopard)</h1>
+            <h2>아시아와 아프리카에 서식하고 있는 대표적인 고양이과 맹수이다.</h2> </br>
+            <a href="https://namu.wiki/w/%ED%91%9C%EB%B2%94"><img src="images/Leopard.png"></a>
+            <p> 호랑이, 사자, 재규어 등이 해당되는 '고양이과 표범아과'와 퓨마, 치타 등이 해당되는 '고양이과 고양이아과'를 모두 포함한 고양이과 전체에서는 호랑이, 사자, 재규어, 퓨마에 이어 고양이과 동물 중 5번째로 큰 동물이다.</br></p>
+            크기는 지역마다 다른데, 북아프리카에서 기록된 최대 개체는 총길이 275cm이고 무게는 불명이며, 남아프리카에서 기록된 최대 개체의 총길이는 262cm이고, 무게는 96.5kg이며, 인도에서 기록된 최대 개체의 총길이는 261cm고, 무게는 78.5kg이다.</p>
+            <br>
+            <h1>3. 분홍 가슴 파랑새 (Lilac Breasted Roller)</h1>
+            <h2>파랑새의 일종으로, 아프리카 동남부 사바나 위주에서 서식하는 새이다.</h2> </br>
+            <a href="https://namu.wiki/w/%EB%B6%84%ED%99%8D%EA%B0%80%EC%8A%B4%ED%8C%8C%EB%9E%91%EC%83%88"><img src="images/Lilac breasted roller.png"></a>
+            <p>동아프리카에서 주로 발견되는 새로, 몸 색깔이 캔버스처럼 매우 화려하다. 학명인 Coracias caudatus에서 caudatus는 라틴어로 꼬리를 뜻하는데 꽁지깃의 특이성 때문에 지어졌다. 아프리카 일부 지역에서는 Mosilikatze's roller라는 이름으로도 불리는데 은데벨라 족의 왕국을 세운 음질리카지(Mzilikazi) 왕의 이름을 따서 이렇게 부른다. 몸길이 36~40cm정도의 새로 파랑새과에 속하는 새로 파랑색 뿐만 아니라 가슴에 분홍색의 깃털이 독보적이다. 나무 구멍같은데다가 둥지를 틀고 2~4개의 알을 낳고 태어난 새끼들은 1개월 안에 깃털이 다 난다. 먹이로는 거미, 도마뱀, 곤충 등을 잡아먹고 산다. 먹이를 발견하면 높은 곳에서 지켜보다가 훅 날아서 낚아챈다.</p>
+            <br>
+            <h1>4. 사자 (Lion)</h1>
+            <h2>사자(獅子)는 아프리카와 인도에 서식하는 식육목(食肉目) 고양이과 포유류이다.</h2> </br>
+            <a href="https://namu.wiki/w/%EC%82%AC%EC%9E%90"><img src="images/lion.png"></a>
+            <p>북아프리카와 중동, 서아시아, 유럽, 아라비아에서도 과거엔 서식했었으나 유럽 지역에서는 기원전부터 씨가 말랐고, 인도를 제외한 아시아 지역에서도 19~20세기 부터 하나둘씩 사라져갔다. 북아프리카에서도 1920년 모로코에서 사살되어 이 지역들의 야생 사자는 멸종된 상태이다.</br>
+                지금은 대부분이 남아프리카 사바나 일대에 서식하고 있고, 남서아프리카의 나미비아 사막에 밀렵으로 멸종된 줄 알았던 사막 사자가 살아남아 있으며 사헬 지대에도 일부 살아남아 있다. 인도의 기르숲이란 곳에도 사자가 약간 남아있기는 하다. 현재도 개체수가 계속 감소 중인 사자기에, 나중엔 일부 보호구역에서 소수만이 남을 것이다. 간지나는 비주얼과 강인한 사냥 능력으로 오랫동안 '백수의 왕'으로 불리우며 왕의 상징으로 여겨지는 등 인기를 누려온 동물이다.</p></br>
+            <h1>5. 얼룩말 (Zebra)</h1>
+            <h2>검고 흰 얼룩무늬가 있는 말과 말속의 야생동물. 현생 말의 얼마 안 되는 친족이다.</h2> </br>
+            <a href="https://namu.wiki/w/%EC%96%BC%EB%A3%A9%EB%A7%90"><img src="images/Zebra.png"></a>
+            <p>아프리카 대륙의 사바나 지역에 널리 분포한다. 위로는 수단, 아래로는 남아프리카 공화국에 이르는 서식지를 가진다. 몸높이는 120~160cm 정도이며 무게는 160~500kg 정도로 말보다는 작고 당나귀와 비슷한 크기이다.</br>
+                현재 사바나얼룩말(Equus quagga), 그레비얼룩말(Equus grevyi), 산얼룩말(Equus zebra) 3종의 얼룩말이 있으며 3종 모두 아프리카에 산다. 이들 3종은 주로 체구와 줄무늬의 형태로 구분하며, 각 종에 따라 선호하는 서식지가 다르다. 사바나얼룩말의 아종으로는 민갈기얼룩말, 크로셰이얼룩말, 부르첼얼룩말, 채프먼얼룩말과 그랜트얼룩말이 있으며, 멸종된 동물인 콰가 또한 사바나얼룩말의 아종이다.</p>
+                </br>
+                </br>
+                </br>
+        </article>
+    </div>
+
+                <div id="header1">
+                <h1>그 외 동물들</h1></br>
+                </div>
+                <div class="table1-wrapper">
+                    <table class="table1">
+                        <tr><th>코끼리</th><th>물소</th><th>검은 코뿔소</th><th>누</th><th>혹멧돼지</th><th>치타</th><th>몽구스</th><th>흰개미</th><th>흰 코뿔소</th><th>가젤</th><th>타조</th><th>기린</th><th>하마</th></tr>
+                        <tr><td><a href="https://namu.wiki/w/%EC%BD%94%EB%81%BC%EB%A6%AC"><img src="images/Elephantidae.png" width="100"></a></td><td><a href="https://namu.wiki/w/%EC%95%84%ED%94%84%EB%A6%AC%EC%B9%B4%EB%AC%BC%EC%86%8C"><img src="images/africa buffalo.jpg" width="100"></a></td><td><a href="https://namu.wiki/w/%EA%B2%80%EC%9D%80%EC%BD%94%EB%BF%94%EC%86%8C"><img src="images/Black rhinoceros.png" width="100"></a></td>
+                        <td><a href="https://namu.wiki/w/%EB%88%84(%EB%8F%99%EB%AC%BC)"><img src="images/누.jpg" width="100"></a></td><td><a href="https://namu.wiki/w/%ED%98%B9%EB%A9%A7%EB%8F%BC%EC%A7%80"><img src="images/아프리카멧돼지.jpg" width="100"></a></td><td><a href="https://namu.wiki/w/%EC%B9%98%ED%83%80"><img src="images/Cheetah.png" width="100"></a></td>
+                        <td><a href="https://namu.wiki/w/%EB%AA%BD%EA%B5%AC%EC%8A%A4"><img src="images/Mongoose.png" width="100"></a></td><td><a href="https://namu.wiki/w/%ED%9D%B0%EA%B0%9C%EB%AF%B8"><img src="images/R.s.kyushuensis.jpg" width="100"></a></td><td><a href="https://namu.wiki/w/%ED%9D%B0%EC%BD%94%EB%BF%94%EC%86%8C"><img src="images/Ceratotherium simum.png" width="100"></a></td><td><a href="https://namu.wiki/w/%EA%B0%80%EC%A0%A4"><img src="images/gazelle.png" width="100"></a></td><td><a href="https://namu.wiki/w/%ED%83%80%EC%A1%B0"><img src="images/Ostrich.jpg" width="100"></a></td>
+                        <td><a href="https://namu.wiki/w/%EA%B8%B0%EB%A6%B0"><img src="images/Giraffe.png" width="100"></a></td><td><a href="https://namu.wiki/w/%ED%95%98%EB%A7%88"><img src="images/Hippopotamus.png" width="100"></a></td></tr>
+                    </table>
+                </div>
+            
+        </article>
+    </div>
+    </table>
+
+
+
+    <div id = "body-content">
+    	<div id = "body-content">	
+        	<p><audio src="circle of life.mp3" controls></audio></p>
+        </div>
+    <footer class = "footer">
+    </footer>
+    
+	</div>
+</body>
+</html>

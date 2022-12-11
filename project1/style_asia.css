@@ -1,0 +1,309 @@
+* { margin: 0; padding: 0; box-sizing: border-box;}
+
+ul, li { list-style: none; }
+
+[name="slide"] {
+    display: none;
+}
+
+a[title] {
+    font-size: 3em;
+}
+
+h1 {
+    position: relative;
+}
+
+.thumbnail {
+    border-radius: 50px;
+}
+
+.slidebox li:last-child{ margin-right: 0; }
+
+.slidebox h3{
+    width: 100%; height: 50px;
+    line-height: 50px; text-align: center;
+}
+
+.slidebox a{
+    display: block; /* 영역적용위해 사용 */
+    width: 100%; height: 100%;
+
+    overflow: hidden;
+
+    position: relative; /* absolute의 기본기준은 body로 처리 - 현재 요소로 기준변경 */
+}
+
+.caption {
+    left: 80%;
+}
+.slidebox { 
+    max-width: 600px; width: 60%; margin: 0 auto;
+    margin-top: 5%; text-align: center;
+}
+
+.slidebox img { max-width: 100%; }
+
+.slidebox .slidelist { white-space: nowrap; font-size: 5px; overflow: hidden; }
+
+.slidebox .slideitem {
+    position: relative; display: inline-block; vertical-align: middle;
+    width: 100%; transition: all .9s;
+}
+
+.slidebox .slideitem label {
+    position: absolute; z-index: 1; top: 50%;
+    transform: translateY(-50%); padding: 20px;
+    border-radius: 50%; cursor: pointer;
+}
+
+label.left {
+    left: 20px;
+    background-image: url('./images/left-arrow.png');
+    background-position: center center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+label.right {
+    right: 20px;
+    background-image: url('./images/right-arrow.png');
+    background-position: center center;
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+
+label.left:hover {
+    background-color: #5F5F5F;
+}
+
+label.right:hover {
+    background-color: #5F5F5F;
+}
+
+/* 페이징 스타일 */
+.paginglist { text-align: center; padding: 30px 0; }
+
+.paginglist>li { 
+    display: inline-block; vertical-align: middle;
+    margin: 0 10px;
+}
+
+.paginglist>li>label {
+    display: block; padding: 10px 30px;
+    border-radius: 10px;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.paginglist>li:hover>label {
+    background: #333;
+}
+[name="slide"] {display:none;}
+#slide01:checked ~ .slidelist .slideitem {
+    transform:translateX(0);animation:slide01 15s infinite;
+}
+#slide02:checked ~ .slidelist .slideitem {
+    transform:translateX(-100%);animation:slide02 15s infinite;
+}
+#slide03:checked ~ .slidelist .slideitem {
+    transform:translateX(-200%);animation:slide03 15s infinite;
+}
+
+@keyframes slide01 {
+	0% {left:0%;}
+	33% {left:0%;}
+	34% {left:-100%}
+	66% {left:-100%;}
+	67% {left:-200%;}
+	99% {left:-200%;}
+	100% {left:0%;}
+}
+
+@keyframes slide02 {
+	0% {left:0%;}
+	33% {left:0%;}
+	34% {left:-100%;}
+	66% {left:-100%;}
+	67% {left:100%;}
+	99% {left:100%;}
+	100% {left:0%;}
+}
+
+@keyframes slide03 {
+	0% {left:0%;}
+	33% {left:0%;}
+	34% {left:200%;}
+	66% {left:200%;}
+	67% {left:100%;}
+	99% {left:100%;}
+	100% {left:0%;}
+}
+
+/* image hover effect */
+
+.image {
+    position: relative;
+    width: 400px;
+}
+
+.image__img {
+    display: block;
+    width: 100%;
+}
+
+.image__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.image__overlay--blur {
+    backdrop-filter: blur(5px);
+}
+
+.image__overlay--primary {
+    background: #00957736;
+}
+
+.image__overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.image__overlay:hover {
+    opacity: 1;
+}
+
+.image__overlay:hover > * {
+    transform: translateY(0);
+}
+
+.image__title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.image__description {
+    font-size: 1.25em;
+    margin-top: 0.25em;
+}
+
+/* 이 아래로 jquery.lightbox.css의 파일내용입니다 */
+
+/**
+ * jQuery lightBox plugin
+ * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
+ * and adapted to me for use like a plugin from jQuery.
+ * @name jquery-lightbox-0.5.css
+ * @author Leandro Vieira Pinho - http://leandrovieira.com
+ * @version 0.5
+ * @date April 11, 2008
+ * @category jQuery plugin
+ * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
+ * @license CCAttribution-ShareAlike 2.5 Brazil - http://creativecommons.org/licenses/by-sa/2.5/br/deed.en_US
+ * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
+ */
+#jquery-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	width: 100%;
+	height: 500px;
+}
+#jquery-lightbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	text-align: center;
+	line-height: 0;
+}
+#lightbox-image {
+	width: 100%;
+	height: auto;
+}
+#jquery-lightbox a img { border: none; }
+#lightbox-container-image-box {
+	position: relative;
+	background-color: #fff;
+	width: 250px;
+	height: 250px;
+	margin: 0 auto;
+}
+#lightbox-container-image { padding: 10px; }
+#lightbox-loading {
+	position: absolute;
+	top: 40%;
+	left: 0%;
+	height: 25%;
+	width: 100%;
+	text-align: center;
+	line-height: 0;
+}
+#lightbox-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+}
+#lightbox-container-image-box > #lightbox-nav { left: 0; }
+#lightbox-nav a { outline: none;}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext {
+	width: 49%;
+	height: 100%;
+	zoom: 1;
+	display: block;
+}
+#lightbox-nav-btnPrev { 
+	left: 0; 
+	float: left;
+}
+#lightbox-nav-btnNext { 
+	right: 0; 
+	float: right;
+}
+#lightbox-container-image-data-box {
+	font: 10px Verdana, Helvetica, sans-serif;
+	background-color: #fff;
+	margin: 0 auto;
+	line-height: 1.4em;
+	overflow: auto;
+	width: 100%;
+	padding: 0 10px 0;
+}
+#lightbox-container-image-data {
+	padding: 0 10px; 
+	color: #666; 
+}
+#lightbox-container-image-data #lightbox-image-details { 
+	width: 70%; 
+	float: left; 
+	text-align: left; 
+}	
+#lightbox-image-details-caption { font-weight: bold; font-size: 15px;}
+#lightbox-image-details-currentNumber {
+	display: block; 
+	clear: left; 
+	padding-bottom: 1.0em;	
+}			
+#lightbox-secNav-btnClose {
+	width: 66px; 
+	float: right;
+	padding-bottom: 0.7em;	
+}

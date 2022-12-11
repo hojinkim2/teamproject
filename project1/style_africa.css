@@ -1,0 +1,182 @@
+
+* {margin: 0; padding: 0;}
+
+.section input[id*="slide"] {display:none;}
+.section .slidewrap {max-width:1200px;margin:0 auto;}
+.section .slidelist {white-space:nowrap;font-size:0;overflow:hidden;position:relative;}
+.section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
+.section .slidelist > li > a {display:block;position:relative;}
+.section .slidelist > li > a img {width:100%;}
+.section .slidelist label {position:absolute;z-index:10;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
+.section .slidelist .textbox {position:absolute;z-index:1;bottom:0%;left:50%;transform:translate(-50%,-50%);line-height:1.6;text-align:center;}
+.section .slidelist .textbox h3 {font-size:36px;color:#fff;;transform:translateY(30px);transition:all .5s;}
+.section .slidelist .textbox p {font-size:16px;color:#fff;opacity:0;transform:translateY(30px);transition:all .5s;}
+.section .slidelist .textbox {position:absolute;z-index:1;bottom:0%;left:50%;transform:translate(-50%,-50%);line-height:1.6;text-align:center;}
+.section .slidelist .textbox h3 {font-size:36px;color:yellow;;transform:translateY(30px);transition:all .5s;}
+.section .slidelist .textbox p {font-size:16px;color:yellow;opacity:0;transform:translateY(30px);transition:all .5s;}
+
+.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform: translateX(0%);}
+.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-100%);}
+.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-200%);}
+.section [id="slide04"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-300%);}
+.section [id="slide05"]:checked ~ .slidewrap .slidelist > li {transform: translateX(-400%);}
+
+.slide-control > div {display:none;}
+.section .left {left:5px;background:url('images/prev.png') center center / 50% no-repeat;}
+.section .right {right:5px;background:url('images/next.png') center center / 50% no-repeat;}
+.section input[id="slide01"]:checked ~ .slidewrap .slide-control > div:nth-child(1) {display:block;}
+.section input[id="slide02"]:checked ~ .slidewrap .slide-control > div:nth-child(2) {display:block;}
+.section input[id="slide03"]:checked ~ .slidewrap .slide-control > div:nth-child(3) {display:block;}
+.section input[id="slide04"]:checked ~ .slidewrap .slide-control > div:nth-child(4) {display:block;}
+.section input[id="slide05"]:checked ~ .slidewrap .slide-control > div:nth-child(5) {display:block;}
+
+
+/* input에 체크되면 텍스트 효과 */
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide04"]:checked ~ .slidewrap li:nth-child(4) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide04"]:checked ~ .slidewrap li:nth-child(4) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+.section input[id="slide05"]:checked ~ .slidewrap li:nth-child(5) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+.section input[id="slide05"]:checked ~ .slidewrap li:nth-child(5) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+
+	/* 페이징 */
+	.slide-pagelist {text-align:center;padding:20px;}
+	.slide-pagelist > li {display:inline-block;vertical-align:middle;}
+	.slide-pagelist > li > label {display:block;padding:8px 30px;border-radius:30px;background:#ccc;margin:20px 10px;cursor:pointer;}
+	.section input[id="slide01"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(1) > label {background:#999;}
+	.section input[id="slide02"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(2) > label {background:#999;}
+	.section input[id="slide03"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(3) > label {background:#999;}
+	.section input[id="slide04"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(4) > label {background:#999;}
+	.section input[id="slide05"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(5) > label {background:#999;}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#main-content img {
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin: 10px auto;
+}
+
+
+#main-header {
+    padding: 10px 5px;
+}
+#main-header h1 {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 27px;
+    text-align: center;
+    color: palegoldenrod;
+    
+}
+
+#main-header label {
+    text-align: center;
+    float: right;
+    width: 40px;
+    height: 27px;
+    line-height: 27px;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+
+#main-content h1 {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    
+}
+#main-content h2 {
+    text-align: center;
+    color: white;
+    font-size: 17px;
+}
+#main-content p {
+    color: red;
+    text-align: center;
+
+}
+#sub-content {
+    padding-top: 30px;
+}
+
+#sub-content h1 {
+    text-align: center;
+    color: white;
+}
+#sub-content h2 {
+    text-align: center;
+    color: white;
+    font-size: 17px;
+}
+
+#sub-content p {
+    text-align: center;
+    color: red;
+}
+
+#sub-content img {
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin: 10px auto;
+}
+
+#sub-content2 img {
+
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 10px auto;
+}
+#sub-content2 h1 {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.table1-wrapper {
+    overflow-x: auto; /* responsive */
+}
+.table1 {
+    width: 100%; /* responsive */
+    border-collapse: collapse;
+}
+.table1 th, .table1 td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: white;
+}
+
+#header1 {
+    text-align: center;
+    font-size: 17px;
+    color: white;
+
+}
+.css_test {
+    background-image : url('images/back.jpg');
+    display : inline-block;
+    font-weight : bold;
+    background-size: 100% 100%;
+    overflow : auto;
+    text-align : center;
+    width : 100%;
+}
+
+.css_test span {
+    background : #fff;
+    border-radius : 5px;
+    padding : 15px;
+}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <link href="Main.css" rel="stylesheet"> -->
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous">
+    </script>
+    <!-- <script src="JQUERY_Main.js"></script> -->
+    <script>
+        $(document).ready(function(){
+        $(".m1").click(function(){
+        // $(".m1").css({'color': 'black'});
+        // $(".m2, .m3, .m4").css({'color': 'white'});
+        $(".active").css({'left': '0px', 'transform': 'skewX(20deg)'});
+    });
+    $(".m2").click(function(){
+        // $(".m2").css({'color': 'black'});
+        // $(".m1, .m3, .m4").css({'color': 'white'});
+        $(".active").css({'left': '105px', 'transform': 'skewX(20deg)'});
+    });
+    $(".m3").click(function(){
+        // $(".m3").css({'color': 'black'});
+        // $(".m1, .m2, .m4").css({'color': 'white'});
+        $(".active").css({'left': '364.41px', 'transform': 'skewX(-20deg)'});
+    });
+    $(".m4").click(function(){
+        // $(".m4").css({'color': 'black'});
+        // $(".m1, .m2, .m3").css({'color': 'white'});
+        $(".active").css({'left': '469.41px', 'transform': 'skewX(-20deg)'});
+    });
+})
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#link1").click(function(){
+                // 특정 요소의 top 위치값을 불러오는 함수 -> $path에 저장
+                $path=$("#Box1").offset().top;
+
+                // animate함수의 scrollTop을 이용해서  저장된 top위치값으로 1초동안 스크롤이동
+                $('html, body').animate({scrollTop: $path}, 1000);
+            });
+            $("#link2").click(function(){
+                $path=$("#Box2").offset().top;
+
+                $('html, body').animate({scrollTop: $path}, 1000);
+            });
+            $("#link3").click(function(){
+                $path=$("#Box3").offset().top;
+
+                $('html, body').animate({scrollTop: $path}, 1000);
+            });
+            $("#link4").click(function(){
+                $path=$("#Box4").offset().top;
+
+                $('html, body').animate({scrollTop: $path}, 1000);
+            });
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #222;
+}
+
+.main{
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    animation: ani 4s ease 1;
+}
+
+.menu{
+    width: 100px;
+    height: 30px;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: white;
+    padding: 0px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+
+.active{
+    width: 100px;
+    height: 30px;
+    background-color: green;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+
+    /* 각도에 따라 x축에 따른 경사 변형 */
+    transform: skewX(20deg);
+    
+    z-index: -1;
+
+    /* all: 속성, 0.3s: 지속시간, ease-in: 속도 */
+    transition: all 0.3s ease-in;
+}
+
+/* .m1{
+    color: black;
+} */
+
+.logo{
+    display: inline-block;
+    width: 144.41px;
+    height: 43px;
+    color: white;
+}
+
+#Box1, #Box2, #Box3, #Box4{
+    height: 100vh;
+    width: 100%;
+    /* text-align: center;
+    font-family: arial black;
+    font-size: 60px;
+    line-height: 100vh; */
+}
+#Box1{
+    background-color: black;
+}
+#Box2{
+    background-color: black;
+}
+#Box3{
+    background-color: black;
+}
+#Box4{
+    background-color: black;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.container_01{
+    position: absolute;
+    /* margin: auto auto; */
+    width: 80%;
+    height: 800px;
+    background-color: #333333;
+    top: 15vh;
+    left: 10%;
+
+    overflow: hidden;
+}
+
+.container_02{
+    position: absolute;
+    /* margin: auto auto; */
+    width: 80%;
+    height: 800px;
+    background-color: #333333;
+    top: 115vh;
+    left: 10%;
+
+    overflow: hidden;
+}
+
+.container_03{
+    position: absolute;
+    /* margin: auto auto; */
+    width: 80%;
+    height: 800px;
+    background-color: #333333;
+    top: 215vh;
+    left: 10%;
+
+    overflow: hidden;
+}
+.container_04{
+    position: absolute;
+    /* margin: auto auto; */
+    width: 80%;
+    height: 800px;
+    background-color: #333333;
+    top: 315vh;
+    left: 10%;
+
+    overflow: hidden;
+}
+
+.img_01{
+    position: relative;
+    left: 10%;
+    top: 7%;
+    width:40%;
+    height: 700px;
+    background-image: url("images/img_01.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    float:left;
+}
+.img_02{
+    position: relative;
+    left: 10%;
+    top: 7%;
+    width:40%;
+    height: 700px;
+    background-image: url("images/img_02.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    float:left;
+}
+.img_03{
+    position: relative;
+    left: 10%;
+    top: 7%;
+    width:40%;
+    height: 700px;
+    background-image: url("images/img_03.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    float:left;
+}
+.img_04{
+    position: relative;
+    left: 10%;
+    top: 7%;
+    width:40%;
+    height: 700px;
+    background-image: url("images/img_04.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    float:left;
+}
+
+.text{
+    color: white;
+    position: relative;
+    right: 5%;
+    top: 7%;
+
+    width: 40%;
+    height: 700px;
+
+    float: right;
+}
+
+.text h1{
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 70px;
+}
+
+.text p{
+    font-family: 'Jua', sans-serif;
+    font-size: 18px;
+}
+
+/* menu bar 애니메이션 */
+@keyframes ani{
+    from{
+        top: -70px;
+    }
+    to{
+        top: 70px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <span class="menu m1"><a href="#Box1" id="link1">퓨마</a></span>
+        <span class="menu m2"><a href="#Box2" id="link2">재규어</a></span>
+        
+        <span class="logo">
+            <h1>AMERICA</h1>
+        </span>
+        
+        <span class="menu m3"><a href="#Box3" id="link3">코요테</a></span>
+        <span class="menu m4"><a href="#Box4" id="link4">코디악곰</a></span>
+        <span class="active"></span>
+    </div>
+
+
+
+    <div id="Box1">
+        <div class="container_01">
+            <div class="img_01">
+            </div>
+            <div class="text">
+                <h1>퓨마</h1>
+                <p>대륙에서 재규어 다음으로 큰 고양이과 맹수로 표범보다 조금 더 크다. 몸길이 110cm∼160cm, 꼬리길이 60 ~ 81cm, 몸무게 25 ~ 80kg이 보통이며, 1901년에 105kg에 달하는 퓨마가 발견된 기록이 있다. 머리가 작고 털은 짧고 거칠다.</p>
+                <p>털 색깔은 사자보다 조금 진한 황갈색 단색이 보통이지만, 개체에 따라서는 은회색이나 적갈색에 가까운 경우도 있다. 다만 새끼 때는 점박이이며 커가며 점이 사라진다. 새끼 때는 눈 색상도 푸른 색이다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="Box2">
+        <div class="container_02">
+            <div class="img_02">
+            </div>
+            <div class="text">
+                <h1>재규어</h1>
+                <p>재규어의 무늬는 표범의 무늬와 유사하기 때문에 재규어와 표범은 자주 혼동되지만 자세히 보면 다른 동물이다. 재규어는 표범보다 머리와 몸집이 더 크고 힘도 표범보다 더 세며 전체적으로 두껍고 튼튼한 체형인 반면, 표범은 머리가 재규어보다는 좀 작고 다리도 조금 길어서 전체적으로 날렵한 체형이며 둘 모두 나무를 잘 타고 물을 좋아하지만 수영은 재규어가 더 즐기고 나무는 표범이 조금 더 잘 탄다.</p>
+                <p>재규어와 표범 모두 무늬가 꽃무늬 같은 고리 무늬이지만 재규어는 무늬 안에 점이 있고 표범은 무늬 안에 점이 없으며 얼굴의 무늬도 다른데 재규어는 얼굴의 무늬가 큰 점무늬이지만 표범은 얼굴의 무늬가 작고 촘촘한 점무늬이다. 꼬리는 재규어가 표범보다 짧고, 눈은 재규어가 표범보다 작고 눈 사이의 거리가 길다. 이들과 비슷한 동물로는 치타가 있다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="Box3">
+        <div class="container_03">
+            <div class="img_03">
+            </div>
+            <div class="text">
+                <h1>코요테</h1>
+                <p>몸길이 75-125cm, 꼬리길이 30-40cm, 몸무게 7-20kg 정도이다. 체형이나 등의 털이 긴 점은 이리와 같은데, 귓바퀴가 크고, 꼬리는 여우를 닮아 굵으며, 주둥이는 뾰족하다. 털빛은 회갈색이고, 다리는 주황색을 띠고 있으며, 꼬리의 끝은 일반적으로 검다. 초원·관목림·소림에서 단독, 한 쌍 또는 작은 무리를 지어서 산다.</p>
+                <p>행동권은 8-80km2 정도이고 주로 야간에 활동하며, 하룻밤에 평균 4km를 걷는다. 잡식성이지만 대부분 육식을 하며, 주식은 주로 쥐나 프레리도그, 우드척, 비버, 아메리카너구리, 두더지, 아홉띠아르마딜로 등의 작은 동물이나 닭이나 오리 등의 가금류로 몰래 다가가서 덮치는데, 큰뿔양, 돌산양, 가지뿔영양도 잡아먹고 몇 마리가 협력하여 멧돼지 같은 동물을 쫓아가서 잡는 경우도 있으며, 과일이나 채소를 먹기도 한다.</p>
+            </div>
+        </div>
+    </div>
+    <div id="Box4">
+        <div class="container_04">
+            <div class="img_04">
+            </div>
+            <div class="text">
+                <h1>코디악곰</h1>
+                <p>코디악곰 또는 코디악불곰, 알래스카불곰은 알래스카 서남부 코디악 군도에 서식하는 식인곰이다. 불곰 중 가장 큰 아종이고, 성체의 평균 길이가 2.7m에 달하며, 곰 중에서 북극곰과 함께 가장 큰 곰이다.
+                    코디악곰은 지구상에서 가장 큰 육식동물이다.</p>
+                <p>코디악곰은 완전한 육식동물로 주로 체중이 200-300kg이 나가는 사슴류, 들소, 스라소니, 흑곰, 늑대같은 육식동물도 잡아먹는다. 코디악곰은 식인곰으로 유명하며 사람도 서슴지 않고 잡아먹는다.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

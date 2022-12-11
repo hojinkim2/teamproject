@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_index.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+
+        });
+        $(window).scroll(function () {
+            var scrHeight = $(window).scrollTop();
+
+            if(scrHeight>=200) {$('#sub1').addClass('animation_translateSubs');}
+            if(scrHeight>=300) {$('.imgWrapper *').addClass('animation_translateImg');}
+            if(scrHeight>=700) {$('#sub2').addClass('animation_translateSubs');}
+            // var y = 1-(-1/500 * scrHeight + 80/50);
+
+            // $('#page-wrapper').css('background-image', 'linear-gradient(rgba(255,255,255,'+y+'), rgba(255,255,255,'+y+')), url("../Penguins.jpg")');
+        });
+    </script>
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="main-header">
+            <h1>동물 소개 페이지</h1>
+        </header>
+        <section id="main-section">
+            <!-- <div id="img01">
+            </div> -->
+            <div class="imgWrapper">
+                <div id="img01">
+                    <div class="img" style="left: 0px; top: 300px; background-image: url('images/animal_001.jpg')"></div>
+                    <div class="img" style="left: 0px; top: 400px; background-image: url('images/animal_002.jpg')"></div>
+                    <div class="img" style="left: -200px; top: 400px; background-image: url('images/animal_003.jpg')"></div>
+                </div>
+                <div id="img02">
+                    <div class="img" style="left: -100px; top: 500px; background-image: url('images/animal_004.png')"></div>
+                    <div class="img" style="left: 900px; top: -100px; background-image: url('images/animal_005.png')"></div>
+                </div>
+            </div>
+            <div id="sub1" class="subSection">
+                <div class="contentWrapper">
+                    <h1>전 세계의 다양한 동물들을 만나보세요</h1>
+                    <!-- <h1>Lorem ipsum</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <img src="http://placekitten.com/200/200"> -->
+                </div>
+            </div>
+            <div id="sub2" class="subSection">
+                <div class="contentWrapper">
+                    <h1>어디로 가고 싶으신가요?</h1>
+                    <div style="width: 100%; height: 100px;"></div> <!-- -->
+                    <div class="mapWrapper">
+                        <div class="map" onclick="location.href='america.html'"><b>아메리카</b></div>
+                        <div class="map" onclick="location.href='africa.html'"><b>아프리카</b></div>
+                        <div class="map" onclick="location.href='asia.html'"><b>아시아</b></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer id="main-footer">
+            <b>Copyright 2022. 개미's all rights reserved.</b><br>
+            <a href="EndPage.html">Click Me!</a>
+        </footer>
+    </div>
+</body>
+</html>
